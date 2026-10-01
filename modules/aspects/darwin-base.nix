@@ -3,6 +3,7 @@
     includes = [
       den.batteries.hostname
       den.aspects.nix-core
+      den.aspects.system-packages
       den.aspects.macos-defaults
       den.aspects.homebrew
     ];

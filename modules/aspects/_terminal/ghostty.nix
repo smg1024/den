@@ -3,8 +3,6 @@
   pkgs,
   ...
 }: {
-  home.packages = [pkgs.nerd-fonts.d2coding];
-
   programs.ghostty = {
     enable = true;
     package =
