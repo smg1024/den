@@ -6,6 +6,7 @@
       den.aspects.shell
       den.aspects.editor
       den.aspects.terminal
+      den.aspects.window-management
       den.aspects.cli-tools
       den.aspects.git
       den.aspects.ssh
