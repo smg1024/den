@@ -50,6 +50,7 @@
         "claude-code@latest"
         "codex"
         "codexbar"
+        "discord"
         "finetune"
         "google-chrome"
         "iina"
