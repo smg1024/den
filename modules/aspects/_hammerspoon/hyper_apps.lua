@@ -2,7 +2,7 @@
 return {
 	a = "com.daymore.Across",
 	b = "app.zen-browser.zen",
-	c = "dev.zed.Zed",
+	c = "dev.zed.Zed-Nightly",
 	d = "com.jetbrains.datagrip",
 	f = "com.apple.finder",
 	g = "com.openai.codex",
