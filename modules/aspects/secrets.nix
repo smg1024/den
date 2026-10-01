@@ -19,7 +19,10 @@
       };
 
       # Each mode selects the encrypted file through sops.defaultSopsFile.
-      secrets.git_ssh = {};
+      secrets = {
+        git_ssh = {};
+        gh_token = {};
+      };
     };
   };
 }
