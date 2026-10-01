@@ -11,6 +11,7 @@
     ./jq.nix
     ./lazygit.nix
     ./marp-cli.nix
+    ./nh.nix
     ./npm.nix
     ./ripgrep.nix
     ./rust.nix
