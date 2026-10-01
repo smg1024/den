@@ -2,6 +2,11 @@
   den.aspects.macos-defaults.darwin = {config, ...}: let
     primaryUserHome = config.users.users.${config.system.primaryUser}.home;
   in {
+    security.pam.services.sudo_local = {
+      touchIdAuth = true;
+      watchIdAuth = true;
+    };
+
     system = {
       defaults = {
         loginwindow = {

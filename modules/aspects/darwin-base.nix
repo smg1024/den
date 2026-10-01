@@ -4,6 +4,7 @@
       den.batteries.hostname
       den.aspects.nix-core
       den.aspects.macos-defaults
+      den.aspects.homebrew
     ];
 
     darwin = {config, ...}: {

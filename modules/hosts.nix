@@ -5,6 +5,12 @@
     huginn.users.poby.classes = ["user"];
   };
 
-  den.aspects.fenrir.includes = [den.aspects.darwin-base];
-  den.aspects.huginn.includes = [den.aspects.darwin-base];
+  den.aspects.fenrir.includes = [
+    den.aspects.darwin-base
+    den.aspects.fenrir-brew
+  ];
+  den.aspects.huginn.includes = [
+    den.aspects.darwin-base
+    den.aspects.huginn-brew
+  ];
 }
