@@ -1,0 +1,21 @@
+-- Shared across hosts and modes. Missing applications are reported on launch.
+return {
+	a = "com.daymore.Across",
+	b = "app.zen-browser.zen",
+	c = "dev.zed.Zed",
+	d = "com.jetbrains.datagrip",
+	f = "com.apple.finder",
+	g = "com.openai.codex",
+	h = "com.anthropic.claudefordesktop",
+	i = "notion.id",
+	j = "com.apple.campo",
+	k = "com.kakao.KakaoTalkMac",
+	l = "ru.keepcoder.Telegram",
+	m = "com.apple.mail",
+	n = "com.apple.Notes",
+	s = "com.tinyspeck.slackmacgap",
+	t = "com.mitchellh.ghostty",
+	v = "com.google.Chrome",
+	x = "com.apple.dt.Xcode",
+	z = "com.google.android.studio",
+}

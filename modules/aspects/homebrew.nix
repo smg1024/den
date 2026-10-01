@@ -1,4 +1,10 @@
-{inputs, ...}: {
+{
+  inputs,
+  den,
+  ...
+}: {
+  den.aspects.homebrew.includes = [den.aspects.hammerspoon];
+
   den.aspects.homebrew.darwin = {config, ...}: {
     imports = [inputs.nix-homebrew.darwinModules.nix-homebrew];
 
@@ -46,7 +52,6 @@
         "codexbar"
         "finetune"
         "google-chrome"
-        "hammerspoon"
         "iina"
         "keka"
         "kekaexternalhelper"

@@ -7,6 +7,7 @@
       den.aspects.editor
       den.aspects.terminal
       den.aspects.window-management
+      den.aspects.hammerspoon
       den.aspects.cli-tools
       den.aspects.git
       den.aspects.ssh
