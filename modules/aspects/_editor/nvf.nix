@@ -77,6 +77,11 @@ in {
         inlayHints.enable = true;
         formatOnSave = true;
 
+        servers.bash-language-server.settings.bashIde = {
+          shellcheckPath = "${pkgs.shellcheck}/bin/shellcheck";
+          shfmt.path = "${pkgs.shfmt}/bin/shfmt";
+        };
+
         servers.nixd.settings.nixd = {
           nixpkgs.expr = "import (${denFlake}).inputs.nixpkgs { system = \"${pkgs.stdenv.hostPlatform.system}\"; }";
           formatting.command = ["${pkgs.alejandra}/bin/alejandra"];
@@ -124,8 +129,39 @@ in {
         };
       };
 
-      # Use Conform's on-save hook, without a second asynchronous formatting pass.
-      formatter.conform-nvim.setupOpts.format_after_save = null;
+      languages.lua = {
+        enable = true;
+        lsp.servers = ["lua-language-server"];
+        format = {
+          enable = true;
+          type = ["stylua"];
+        };
+        extraDiagnostics = {
+          enable = true;
+          types = ["luacheck"];
+        };
+      };
+
+      languages.bash = {
+        enable = true;
+        lsp.servers = ["bash-language-server"];
+        format = {
+          enable = true;
+          type = ["shfmt"];
+        };
+        # Bash Language Server already provides ShellCheck diagnostics.
+        extraDiagnostics.enable = false;
+      };
+
+      formatter.conform-nvim.setupOpts = {
+        # Use the on-save hook, without a second asynchronous formatting pass.
+        format_after_save = null;
+
+        # Pinned NVF maps its Zsh formatter to sh; wire zsh explicitly instead.
+        # shfmt detects .zshrc, other Zsh startup files, .zsh, and Zsh shebangs.
+        # Do not attach Bash Language Server or ShellCheck to Zsh buffers.
+        formatters_by_ft.zsh = ["shfmt"];
+      };
 
       fzf-lua.enable = true;
 
