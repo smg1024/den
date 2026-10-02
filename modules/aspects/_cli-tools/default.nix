@@ -17,6 +17,7 @@
     ./rust.nix
     ./uv.nix
     ./yarn.nix
+    ./yazi.nix
     ./zoxide.nix
   ];
 }
