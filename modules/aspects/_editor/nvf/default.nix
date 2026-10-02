@@ -2,23 +2,19 @@
   inputs,
   den,
 }: {
-  config,
   home,
   lib,
   pkgs,
   ...
-}: let
-  # Follow the same working checkout as nh, rather than a frozen store copy.
-  denFlake = "builtins.getFlake ${builtins.toJSON config.programs.nh.flake}";
-
-  # Derive the hostname lookup from Den; adding a host needs no editor changes.
-  darwinOptions = lib.mapAttrs' (name: host:
-    lib.nameValuePair (lib.toLower host.hostName) {
-      expr = "(${denFlake}).darwinConfigurations.${builtins.toJSON name}.options";
-    }) (lib.filterAttrs (_: host: host.class == "darwin")
-    (den.hosts.${pkgs.stdenv.hostPlatform.system} or {}));
-in {
-  imports = [inputs.nvf.homeManagerModules.default];
+}: {
+  imports = [
+    inputs.nvf.homeManagerModules.default
+    (import ./languages/nix.nix {inherit den home;})
+    ./languages/lua.nix
+    ./languages/shell.nix
+    ./languages/python.nix
+    ./languages/rust.nix
+  ];
 
   programs.nvf = {
     enable = true;
@@ -76,149 +72,11 @@ in {
         enable = true;
         inlayHints.enable = true;
         formatOnSave = true;
-
-        servers.bash-language-server.settings.bashIde = {
-          shellcheckPath = "${pkgs.shellcheck}/bin/shellcheck";
-          shfmt.path = "${pkgs.shfmt}/bin/shfmt";
-        };
-
-        servers.pyright = {
-          # Ruff owns import organization; keep Pyright's type analysis enabled.
-          settings.pyright.disableOrganizeImports = true;
-
-          # Prefer the Python project over an enclosing Git repository.
-          root_markers = lib.mkForce [
-            "pyrightconfig.json"
-            "pyproject.toml"
-            "uv.lock"
-            ".venv"
-            "Pipfile"
-            "requirements.txt"
-            "setup.cfg"
-            "setup.py"
-            ".git"
-          ];
-
-          # Use uv's project-local interpreter without activating a shell first.
-          before_init = lib.generators.mkLuaInline ''
-            function(_, server_config)
-              local root = server_config.root_dir
-              if not root then
-                return
-              end
-
-              local python = vim.fs.joinpath(root, ".venv", "bin", "python")
-              if vim.fn.executable(python) == 1 then
-                server_config.settings.python.pythonPath = python
-              end
-            end
-          '';
-        };
-
-        servers.ruff.on_attach = lib.generators.mkLuaInline ''
-          function(client)
-            -- Keep hover documentation with Pyright, and Ruff's lint actions.
-            client.server_capabilities.hoverProvider = false
-          end
-        '';
-
-        servers.nixd.settings.nixd = {
-          nixpkgs.expr = "import (${denFlake}).inputs.nixpkgs { system = \"${pkgs.stdenv.hostPlatform.system}\"; }";
-          formatting.command = ["${pkgs.alejandra}/bin/alejandra"];
-
-          options =
-            {
-              # The selected Home Manager generation determines the mode.
-              home-manager.expr = "(${denFlake}).homeConfigurations.${builtins.toJSON home.name}.options";
-            }
-            // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
-              # Standalone homes have no host binding: select it at Neovim startup.
-              darwin = lib.generators.mkLuaInline ''
-                (function()
-                  local hosts = ${lib.generators.toLua {} darwinOptions}
-                  local hostname = (vim.uv.os_gethostname() or ""):lower()
-                  local options = hosts[hostname] or hosts[hostname:match("^[^.]+") or ""]
-
-                  if not options then
-                    vim.schedule(function()
-                      vim.notify(
-                        "nixd: no Den Darwin configuration for hostname '" .. hostname
-                          .. "'; skipping Darwin option completion",
-                        vim.log.levels.WARN
-                      )
-                    end)
-                  end
-
-                  return options
-                end)()
-              '';
-            };
-        };
-      };
-
-      languages.nix = {
-        enable = true;
-        lsp.servers = ["nixd"];
-        format = {
-          enable = true;
-          type = ["alejandra"];
-        };
-        extraDiagnostics = {
-          enable = true;
-          types = ["deadnix" "statix"];
-        };
-      };
-
-      languages.lua = {
-        enable = true;
-        lsp.servers = ["lua-language-server"];
-        format = {
-          enable = true;
-          type = ["stylua"];
-        };
-        extraDiagnostics = {
-          enable = true;
-          types = ["luacheck"];
-        };
-      };
-
-      languages.bash = {
-        enable = true;
-        lsp.servers = ["bash-language-server"];
-        format = {
-          enable = true;
-          type = ["shfmt"];
-        };
-        # Bash Language Server already provides ShellCheck diagnostics.
-        extraDiagnostics.enable = false;
-      };
-
-      languages.python = {
-        enable = true;
-        lsp.servers = ["pyright" "ruff"];
-        format = {
-          enable = true;
-          type = ["ruff"];
-        };
-        # Pyright checks types and Ruff supplies lint diagnostics; no Mypy pass.
-        extraDiagnostics.enable = false;
       };
 
       formatter.conform-nvim.setupOpts = {
         # Use the on-save hook, without a second asynchronous formatting pass.
         format_after_save = null;
-
-        # Pinned NVF maps its Zsh formatter to sh; wire zsh explicitly instead.
-        # shfmt detects .zshrc, other Zsh startup files, .zsh, and Zsh shebangs.
-        # Do not attach Bash Language Server or ShellCheck to Zsh buffers.
-        formatters_by_ft.zsh = ["shfmt"];
-
-        # Replace NVF's buffer-indent overrides with Conform's upstream formatter.
-        # Both full-file and range formatting then honor the project's Ruff config.
-        formatters.ruff = lib.mkForce {
-          "inherit" = "ruff_format";
-          command = "${pkgs.ruff}/bin/ruff";
-        };
       };
 
       fzf-lua.enable = true;
