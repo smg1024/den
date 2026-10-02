@@ -34,6 +34,35 @@
         languages = ["en"];
       };
 
+      autocomplete.blink-cmp = {
+        enable = true;
+        friendly-snippets.enable = true;
+
+        # Keep Enter normal and let super-tab own Tab/Shift-Tab.
+        mappings = {
+          confirm = null;
+          next = null;
+          previous = null;
+        };
+
+        setupOpts = {
+          keymap = {
+            preset = "super-tab";
+            "<C-j>" = ["select_next" "fallback"];
+            "<C-k>" = ["select_prev" "fallback"];
+          };
+
+          cmdline.keymap.preset = "inherit";
+          completion.documentation.auto_show_delay_ms = 1000;
+        };
+      };
+
+      lsp = {
+        enable = true;
+        inlayHints.enable = true;
+        formatOnSave = true;
+      };
+
       fzf-lua.enable = true;
 
       # Provide file icons for Neovim pickers.
