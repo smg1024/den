@@ -82,6 +82,46 @@ in {
           shfmt.path = "${pkgs.shfmt}/bin/shfmt";
         };
 
+        servers.pyright = {
+          # Ruff owns import organization; keep Pyright's type analysis enabled.
+          settings.pyright.disableOrganizeImports = true;
+
+          # Prefer the Python project over an enclosing Git repository.
+          root_markers = lib.mkForce [
+            "pyrightconfig.json"
+            "pyproject.toml"
+            "uv.lock"
+            ".venv"
+            "Pipfile"
+            "requirements.txt"
+            "setup.cfg"
+            "setup.py"
+            ".git"
+          ];
+
+          # Use uv's project-local interpreter without activating a shell first.
+          before_init = lib.generators.mkLuaInline ''
+            function(_, server_config)
+              local root = server_config.root_dir
+              if not root then
+                return
+              end
+
+              local python = vim.fs.joinpath(root, ".venv", "bin", "python")
+              if vim.fn.executable(python) == 1 then
+                server_config.settings.python.pythonPath = python
+              end
+            end
+          '';
+        };
+
+        servers.ruff.on_attach = lib.generators.mkLuaInline ''
+          function(client)
+            -- Keep hover documentation with Pyright, and Ruff's lint actions.
+            client.server_capabilities.hoverProvider = false
+          end
+        '';
+
         servers.nixd.settings.nixd = {
           nixpkgs.expr = "import (${denFlake}).inputs.nixpkgs { system = \"${pkgs.stdenv.hostPlatform.system}\"; }";
           formatting.command = ["${pkgs.alejandra}/bin/alejandra"];
@@ -153,6 +193,17 @@ in {
         extraDiagnostics.enable = false;
       };
 
+      languages.python = {
+        enable = true;
+        lsp.servers = ["pyright" "ruff"];
+        format = {
+          enable = true;
+          type = ["ruff"];
+        };
+        # Pyright checks types and Ruff supplies lint diagnostics; no Mypy pass.
+        extraDiagnostics.enable = false;
+      };
+
       formatter.conform-nvim.setupOpts = {
         # Use the on-save hook, without a second asynchronous formatting pass.
         format_after_save = null;
@@ -161,6 +212,13 @@ in {
         # shfmt detects .zshrc, other Zsh startup files, .zsh, and Zsh shebangs.
         # Do not attach Bash Language Server or ShellCheck to Zsh buffers.
         formatters_by_ft.zsh = ["shfmt"];
+
+        # Replace NVF's buffer-indent overrides with Conform's upstream formatter.
+        # Both full-file and range formatting then honor the project's Ruff config.
+        formatters.ruff = lib.mkForce {
+          "inherit" = "ruff_format";
+          command = "${pkgs.ruff}/bin/ruff";
+        };
       };
 
       fzf-lua.enable = true;
