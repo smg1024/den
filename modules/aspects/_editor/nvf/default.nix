@@ -14,6 +14,7 @@
     ./languages/shell.nix
     ./languages/python.nix
     ./languages/rust.nix
+    (import ./languages/web.nix {inherit inputs;})
   ];
 
   programs.nvf = {
