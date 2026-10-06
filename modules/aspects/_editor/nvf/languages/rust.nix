@@ -116,19 +116,6 @@ in {
     };
 
     formatter.conform-nvim.setupOpts = {
-      # Allow cold Rustup/metadata startup; retain NVF's toggles and other timeouts.
-      format_on_save = lib.generators.mkLuaInline ''
-        function(bufnr)
-          if not vim.g.formatsave or vim.b[bufnr].disableFormatSave then
-            return
-          end
-          return {
-            lsp_format = "fallback",
-            timeout_ms = vim.bo[bufnr].filetype == "rust" and 2000 or 500,
-          }
-        end
-      '';
-
       formatters.rustfmt = {
         command = lib.mkForce "${rustTools}/bin/rustfmt";
         # Toolchain and rustfmt.toml lookup must start at this buffer's directory.

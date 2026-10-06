@@ -14,6 +14,7 @@
     ./languages/shell.nix
     ./languages/python.nix
     ./languages/rust.nix
+    ./languages/java.nix
     (import ./languages/web.nix {inherit inputs;})
     ./languages/json.nix
     ./languages/yaml.nix
@@ -83,6 +84,20 @@
       formatter.conform-nvim.setupOpts = {
         # Use the on-save hook, without a second asynchronous formatting pass.
         format_after_save = null;
+
+        # Allow JVM and Rust toolchain startup without slowing other formatters.
+        format_on_save = lib.generators.mkLuaInline ''
+          function(bufnr)
+            if not vim.g.formatsave or vim.b[bufnr].disableFormatSave then
+              return
+            end
+            local timeouts = { java = 3000, rust = 2000 }
+            return {
+              lsp_format = "fallback",
+              timeout_ms = timeouts[vim.bo[bufnr].filetype] or 500,
+            }
+          end
+        '';
       };
 
       fzf-lua.enable = true;
