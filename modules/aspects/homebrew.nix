@@ -43,7 +43,6 @@
       casks = [
         "antigravity-cli"
         "aside"
-        "atoll"
         "batfi"
         "chatgpt"
         "claude"
@@ -51,7 +50,6 @@
         "codex"
         "codexbar"
         "discord"
-        "finetune"
         "google-chrome"
         "iina"
         "keka"

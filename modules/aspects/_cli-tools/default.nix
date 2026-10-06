@@ -9,7 +9,6 @@
     ./gradle.nix
     ./java.nix
     ./jq.nix
-    ./lazygit.nix
     ./marp-cli.nix
     ./nh.nix
     ./npm.nix
