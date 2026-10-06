@@ -57,6 +57,13 @@
         languages = ["en"];
       };
 
+      theme = {
+        enable = true;
+        name = "catppuccin";
+        style = "macchiato";
+        transparent = false;
+      };
+
       autocomplete.blink-cmp = {
         enable = true;
         friendly-snippets.enable = true;
@@ -121,8 +128,22 @@
 
       fzf-lua.enable = true;
 
-      # Provide file icons for Neovim pickers.
-      mini.icons.enable = true;
+      mini = {
+        # Share file icons between pickers and the status line.
+        icons.enable = true;
+        statusline.enable = true;
+
+        indentscope = {
+          enable = true;
+          # Mark the current indentation scope without an animated reveal.
+          setupOpts.draw.animation = lib.generators.mkLuaInline ''
+            require("mini.indentscope").gen_animation.none()
+          '';
+        };
+
+        # Highlight trailing whitespace; do not automatically trim it on save.
+        trailspace.enable = true;
+      };
 
       utility = {
         surround = {
