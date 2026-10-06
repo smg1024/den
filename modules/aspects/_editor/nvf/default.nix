@@ -129,6 +129,43 @@
       fzf-lua.enable = true;
 
       mini = {
+        ai = {
+          enable = true;
+          # Preserve native an/in syntax selection in Visual mode.
+          setupOpts.mappings = {
+            around_next = "aN";
+            inside_next = "iN";
+            around_last = "aL";
+            inside_last = "iL";
+          };
+        };
+
+        bufremove.enable = true;
+
+        pairs = {
+          enable = true;
+          setupOpts.modes = {
+            insert = true;
+            command = false;
+            terminal = false;
+          };
+        };
+
+        move = {
+          enable = true;
+          # Keep Alt+h/j/k/l available to AeroSpace instead of Neovim.
+          setupOpts.mappings = {
+            left = "<leader>mh";
+            down = "<leader>mj";
+            up = "<leader>mk";
+            right = "<leader>ml";
+            line_left = "<leader>mh";
+            line_down = "<leader>mj";
+            line_up = "<leader>mk";
+            line_right = "<leader>ml";
+          };
+        };
+
         # Share file icons between pickers and the status line.
         icons.enable = true;
         statusline.enable = true;
@@ -178,10 +215,20 @@
 
       binds.whichKey = {
         enable = true;
-        register."<leader>f" = "+FZF";
+        register = {
+          "<leader>b" = "+Buffers";
+          "<leader>f" = "+FZF";
+          "<leader>m" = "+Move";
+        };
       };
 
       keymaps = [
+        {
+          key = "<leader>bd";
+          mode = "n";
+          action = "<Cmd>lua MiniBufremove.delete(0, false)<CR>";
+          desc = "Close buffer (keep splits)";
+        }
         {
           key = "<leader>ff";
           mode = "n";
