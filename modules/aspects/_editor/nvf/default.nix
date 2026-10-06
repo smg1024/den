@@ -39,6 +39,10 @@
         wrap = false;
         scrolloff = 10;
         sidescrolloff = 8;
+
+        # Keep folds available, but start each buffer with its contents visible.
+        foldlevel = 99;
+        foldlevelstart = 99;
       };
 
       clipboard = {
@@ -74,6 +78,20 @@
           cmdline.keymap.preset = "inherit";
           completion.documentation.auto_show_delay_ms = 1000;
         };
+      };
+
+      # Install parsers for the selected language modules, not every grammar.
+      languages.enableTreesitter = true;
+
+      treesitter = {
+        enable = true;
+        addDefaultGrammars = true;
+        highlight.enable = true;
+        indent.enable = true;
+        fold = true;
+
+        # Parsers are supplied by Nix; no runtime parser compiler is needed.
+        vendorCLI = false;
       };
 
       lsp = {
