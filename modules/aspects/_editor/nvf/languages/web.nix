@@ -20,11 +20,19 @@ in {
     ./svelte.nix
     ./astro.nix
     ./tailwind.nix
+    ./html.nix
+    ./css.nix
+    ./scss.nix
   ];
 
   programs.nvf.settings.vim = {
     lsp.servers =
-      lib.genAttrs ["typescript-language-server" "svelte-language-server" "astro-language-server"] (_: {
+      lib.genAttrs [
+        "typescript-language-server"
+        "svelte-language-server"
+        "astro-language-server"
+        "superhtml"
+      ] (_: {
         # Conform/Prettier is the sole formatter for these languages.
         on_init = lib.generators.mkLuaInline ''
           function(client)
