@@ -101,10 +101,33 @@
         vendorCLI = false;
       };
 
+      diagnostics = {
+        enable = true;
+        config = {
+          signs = true;
+          severity_sort = true;
+          # Show full messages below the current line, not beside every line.
+          virtual_text = false;
+          virtual_lines.current_line = true;
+        };
+      };
+
       lsp = {
         enable = true;
         inlayHints.enable = true;
         formatOnSave = true;
+
+        # Use the same shortcuts below, without LspAttach replacing our maps.
+        mappings = {
+          goToDefinition = null;
+          goToDeclaration = null;
+          goToType = null;
+          listImplementations = null;
+          listReferences = null;
+          listDocumentSymbols = null;
+          listWorkspaceSymbols = null;
+          format = null;
+        };
       };
 
       formatter.conform-nvim.setupOpts = {
@@ -218,6 +241,7 @@
         register = {
           "<leader>b" = "+Buffers";
           "<leader>f" = "+FZF";
+          "<leader>l" = "+Language";
           "<leader>m" = "+Move";
         };
       };
@@ -276,6 +300,71 @@
           mode = "n";
           action = "<Cmd>FzfLua builtin<CR>";
           desc = "FzfLua commands";
+        }
+        {
+          key = "<leader>lgd";
+          mode = "n";
+          action = "<Cmd>FzfLua lsp_definitions<CR>";
+          desc = "Go to definition";
+        }
+        {
+          key = "<leader>lgD";
+          mode = "n";
+          action = "<Cmd>FzfLua lsp_declarations<CR>";
+          desc = "Go to declaration";
+        }
+        {
+          key = "<leader>lgt";
+          mode = "n";
+          action = "<Cmd>FzfLua lsp_typedefs<CR>";
+          desc = "Go to type definition";
+        }
+        {
+          key = "<leader>lgi";
+          mode = "n";
+          action = "<Cmd>FzfLua lsp_implementations<CR>";
+          desc = "List implementations";
+        }
+        {
+          key = "<leader>lgr";
+          mode = "n";
+          action = "<Cmd>FzfLua lsp_references<CR>";
+          desc = "List references";
+        }
+        {
+          key = "<leader>lS";
+          mode = "n";
+          action = "<Cmd>FzfLua lsp_document_symbols<CR>";
+          desc = "List document symbols";
+        }
+        {
+          key = "<leader>lws";
+          mode = "n";
+          action = "<Cmd>FzfLua lsp_live_workspace_symbols<CR>";
+          desc = "Search workspace symbols";
+        }
+        {
+          key = "<leader>ld";
+          mode = "n";
+          action = "<Cmd>FzfLua diagnostics_document<CR>";
+          desc = "Buffer diagnostics";
+        }
+        {
+          key = "<leader>lD";
+          mode = "n";
+          action = "<Cmd>FzfLua diagnostics_workspace<CR>";
+          desc = "Known workspace diagnostics";
+        }
+        {
+          key = "<leader>lf";
+          mode = ["n" "x"];
+          lua = true;
+          action = ''
+            function()
+              require("conform").format({ async = true, lsp_format = "fallback" })
+            end
+          '';
+          desc = "Format with Conform";
         }
         {
           key = "n";
