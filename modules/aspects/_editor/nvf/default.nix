@@ -206,6 +206,9 @@
       };
 
       utility = {
+        # Detect project indentation when explicit EditorConfig rules are absent.
+        sleuth.enable = true;
+
         surround = {
           enable = true;
           useVendoredKeybindings = true;
