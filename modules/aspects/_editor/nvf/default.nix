@@ -15,6 +15,9 @@
     ./languages/python.nix
     ./languages/rust.nix
     (import ./languages/web.nix {inherit inputs;})
+    ./languages/json.nix
+    ./languages/yaml.nix
+    ./languages/toml.nix
   ];
 
   programs.nvf = {
