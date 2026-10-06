@@ -1,7 +1,7 @@
 -- Shared across hosts and modes. Missing applications are reported on launch.
 return {
 	a = "com.daymore.Across",
-	b = "app.zen-browser.zen",
+	b = "at.studio.AsideBrowser",
 	c = "dev.zed.Zed-Nightly",
 	d = "com.jetbrains.datagrip",
 	f = "com.apple.finder",

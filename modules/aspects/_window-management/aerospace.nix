@@ -108,12 +108,10 @@ in
         # Shared across hosts and modes, including apps that may not be installed.
         on-window-detected = [
           (workspaceRule "com.mitchellh.ghostty" "1")
-          (workspaceRule "dev.zed.Zed" "1")
           (workspaceRule "dev.zed.Zed-Nightly" "1")
           (workspaceRule "com.apple.dt.Xcode" "1")
           (workspaceRule "com.google.android.studio" "1")
           (workspaceRule "com.jetbrains.datagrip" "1")
-          (workspaceRule "app.zen-browser.zen" "2")
           (workspaceRule "com.google.Chrome" "2")
           (workspaceRule "at.studio.AsideBrowser" "2")
           (workspaceRule "com.anthropic.claudefordesktop" "3")
