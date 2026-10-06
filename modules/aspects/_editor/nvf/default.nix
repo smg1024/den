@@ -18,6 +18,8 @@
     ./languages/json.nix
     ./languages/yaml.nix
     ./languages/toml.nix
+    ./languages/markdown.nix
+    ./languages/mdx.nix
   ];
 
   programs.nvf = {
