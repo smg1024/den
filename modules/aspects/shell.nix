@@ -3,6 +3,11 @@
     includes = [(den.batteries.user-shell "zsh")];
 
     homeManager = {
+      imports = [
+        ./_shell/deja.nix
+        ./_shell/starship.nix
+      ];
+
       programs.zsh = {
         enableCompletion = true;
         syntaxHighlighting.enable = true;
@@ -18,11 +23,6 @@
           ignoreDups = true;
           ignoreSpace = true;
         };
-      };
-
-      programs.starship = {
-        enable = true;
-        enableZshIntegration = true;
       };
     };
   };
