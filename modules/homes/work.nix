@@ -1,4 +1,7 @@
 {
+  # The home name selects a mode, not a separate macOS account.
+  den.homes.aarch64-darwin.work = import ./_poby.nix;
+
   den.aspects.work.homeManager = {
     config,
     lib,
