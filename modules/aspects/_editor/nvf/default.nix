@@ -21,6 +21,7 @@
     ./languages/toml.nix
     ./languages/markdown.nix
     ./languages/mdx.nix
+    ./languages/just.nix
   ];
 
   programs.nvf = {
