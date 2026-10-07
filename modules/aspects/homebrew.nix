@@ -25,10 +25,6 @@
         cleanup = "zap";
       };
 
-      taps = [
-        "abue-ammar/tinycast"
-      ];
-
       masApps = {
         KakaoTalk = 869223134;
         Across = 6444851827;
