@@ -14,6 +14,7 @@
     enableBashIntegration = true;
 
     settings = {
+      shell-integration-features = "sudo,ssh-env,ssh-terminfo";
       window-theme = "system";
       theme = "Catppuccin Macchiato";
       font-family = "D2KodingLigature Nerd Font";
