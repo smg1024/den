@@ -65,7 +65,7 @@
         "tailscale-app"
         "telegram"
         "thaw@beta"
-        "tinycast"
+        "abue-ammar/tinycast/tinycast"
         "utm"
       ];
     };
