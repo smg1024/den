@@ -30,6 +30,7 @@
           ShowSeconds = false;
           FlashDateSeparators = false;
           ShowDate = 1;
+          ShowAMPM = false;
         };
 
         dock = {
