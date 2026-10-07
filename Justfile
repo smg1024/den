@@ -1,18 +1,22 @@
 # Host and home activation stay independent; input updates never activate either.
 set default-list
 
-# Build or switch an explicit host: just host build fenrir
+mode-file := home_directory() / ".config/den/mode"
+
+# Build or switch a host (defaults to the current hostname): just host build
 [arg("action", pattern="^(build|switch)$")]
-[arg("hostname", pattern="^.+$")]
-host action hostname:
-    nh darwin {{ quote(action) }} . --hostname={{ quote(hostname) }} \
+[arg("hostname", pattern="^.*$")]
+host action hostname="":
+    nh darwin {{ quote(action) }} . \
+        --hostname={{ quote(if hostname == "" { trim(shell("hostname -s")) } else { hostname }) }} \
         --no-update-lock-file
 
-# Build or switch an explicit home mode: just home switch work
+# Build or switch a home mode (defaults to ~/.config/den/mode): just home switch
 [arg("action", pattern="^(build|switch)$")]
-[arg("home-name", pattern="^.+$")]
-home action home-name:
-    nh home {{ quote(action) }} . --configuration={{ quote(home-name) }} \
+[arg("home-name", pattern="^.*$")]
+home action home-name="":
+    nh home {{ quote(action) }} . \
+        --configuration={{ quote(if home-name == "" { trim(read(mode-file)) } else { home-name }) }} \
         --no-update-lock-file
 
 # Format the Justfile and all Nix files with the locked formatter.
