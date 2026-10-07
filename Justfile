@@ -6,14 +6,14 @@ set default-list
 [arg("hostname", pattern="^.+$")]
 host action hostname:
     nh darwin {{ quote(action) }} . --hostname={{ quote(hostname) }} \
-        --no-update-lock-file {{ if action == "switch" { "--ask" } else { "" } }}
+        --no-update-lock-file
 
 # Build or switch an explicit home mode: just home switch work
 [arg("action", pattern="^(build|switch)$")]
 [arg("home-name", pattern="^.+$")]
 home action home-name:
     nh home {{ quote(action) }} . --configuration={{ quote(home-name) }} \
-        --no-update-lock-file {{ if action == "switch" { "--ask" } else { "" } }}
+        --no-update-lock-file
 
 # Format the Justfile and all Nix files with the locked formatter.
 fmt:
