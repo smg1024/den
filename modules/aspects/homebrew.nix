@@ -45,6 +45,7 @@
       ];
 
       casks = [
+        "abue-ammar/tinycast/tinycast"
         "antigravity-cli"
         "aside"
         "batfi"
@@ -65,7 +66,6 @@
         "tailscale-app"
         "telegram"
         "thaw@beta"
-        "abue-ammar/tinycast/tinycast"
         "utm"
       ];
     };
