@@ -25,6 +25,10 @@
         cleanup = "zap";
       };
 
+      taps = [
+        "abue-ammar/tinycast"
+      ];
+
       masApps = {
         KakaoTalk = 869223134;
         Across = 6444851827;
@@ -56,12 +60,12 @@
         "kekaexternalhelper"
         "logi-options+"
         "postmelee/tap/alhangeul"
-        "raycast"
         "snapzy"
         "stats"
         "tailscale-app"
         "telegram"
         "thaw@beta"
+        "tinycast"
         "utm"
       ];
     };
