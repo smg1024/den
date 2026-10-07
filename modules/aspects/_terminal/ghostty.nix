@@ -18,7 +18,7 @@
       theme = "Catppuccin Macchiato";
       font-family = "D2KodingLigature Nerd Font";
       font-size = 18;
-      background-opacity = 0.5;
+      background-opacity = 0.8;
       background-opacity-cells = true;
       background-blur = "macos-glass-clear"; # Native glass requires macOS 26+; implies true otherwise
       window-padding-x = 2;
@@ -30,7 +30,7 @@
       notify-on-command-finish-after = "10s";
       notify-on-command-finish-action = "notify,no-bell";
 
-      macos-titlebar-style = "tabs";
+      macos-titlebar-style = "transparent";
       macos-option-as-alt = true;
       window-save-state = "default";
       macos-titlebar-proxy-icon = "hidden";
