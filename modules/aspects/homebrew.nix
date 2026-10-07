@@ -62,7 +62,6 @@
         "tailscale-app"
         "telegram"
         "thaw@beta"
-        "utm"
       ];
     };
   };
