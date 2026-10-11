@@ -9,6 +9,7 @@
       den.aspects.window-management
       den.aspects.hammerspoon
       den.aspects.cli-tools
+      den.aspects.herdr
       den.aspects.git
       den.aspects.ssh
       den.aspects.secrets

@@ -47,6 +47,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    herdr.url = "github:herdrdev/herdr";
     zed.url = "github:zed-industries/zed/nightly";
   };
 
