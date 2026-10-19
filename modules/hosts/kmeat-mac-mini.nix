@@ -9,6 +9,7 @@
       brews = [
         "podman"
         "podman-compose"
+        "mise"
       ];
     };
   };
