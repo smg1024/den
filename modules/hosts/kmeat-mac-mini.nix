@@ -7,8 +7,8 @@
 
     darwin.homebrew = {
       brews = [
-        "docker"
-        "docker-compose"
+        "podman"
+        "podman-compose"
       ];
     };
   };
