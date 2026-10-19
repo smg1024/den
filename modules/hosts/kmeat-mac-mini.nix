@@ -4,5 +4,12 @@
 
   den.aspects.kmeat-mac-mini = {
     includes = [den.aspects.darwin-base];
+
+    darwin.homebrew = {
+      brews = [
+        "docker"
+        "docker-compose"
+      ];
+    };
   };
 }
