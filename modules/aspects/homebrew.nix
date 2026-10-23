@@ -37,12 +37,13 @@
       brews = [
         "cue"
         "mole"
+        "podman"
+        "podman-compose"
         "rtk"
       ];
 
       casks = [
         "abue-ammar/tinycast/tinycast"
-        "antigravity-cli"
         "aside"
         "batfi"
         "chatgpt"
@@ -50,7 +51,6 @@
         "claude-code@latest"
         "codex"
         "codexbar"
-        "discord"
         "google-chrome"
         "iina"
         "keka"
@@ -60,7 +60,6 @@
         "snapzy"
         "stats"
         "tailscale-app"
-        "telegram"
         "thaw@beta"
       ];
     };

@@ -6,17 +6,13 @@
     includes = [den.aspects.darwin-base];
 
     darwin.homebrew = {
-      brews = [
-        "docker"
-      ];
+      brews = [];
 
       casks = [
-        "cursor"
         "datagrip"
-        "docker-desktop"
         "notion"
-        "obsidian"
         "slack"
+        "telegram"
       ];
     };
   };
