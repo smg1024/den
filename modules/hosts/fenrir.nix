@@ -13,6 +13,7 @@
       casks = [
         "android-studio"
         "discord"
+        "nolight132/tap/sonora"
         "telegram"
       ];
     };
