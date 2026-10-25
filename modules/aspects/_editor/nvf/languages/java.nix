@@ -6,7 +6,7 @@
 }: let
   # Pin the editor's JDK independently of the shared CLI toolchain.
   jdk = pkgs.jdk25;
-  jdtls = pkgs.jdt-language-server.override {inherit jdk;};
+  jdtls = pkgs.jdt-language-server.override {jdk25 = jdk;};
   googleJavaFormat = pkgs.google-java-format.override {jre = jdk;};
 in {
   programs.nvf.settings.vim = {
