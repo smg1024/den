@@ -14,21 +14,24 @@
 
         terminal = {
           default_shell = "${config.programs.zsh.package}/bin/zsh";
-          shell_mode = "auto";
-          new_cwd = "follow";
         };
 
         # Follow Ghostty's palette and deliver background agent notifications.
         theme.name = "terminal";
         ui = {
-          sidebar_width = 32;
           agent_panel_sort = "priority";
+          hide_tab_bar_when_single_tab = true;
           toast.delivery = "terminal";
           sound.enabled = false;
         };
 
-        # Native conversation restore needs each agent's Herdr integration.
-        session.resume_agents_on_restore = true;
+        experimental = {
+          reveal_hidden_cursor_for_cjk_ime = true;
+          cjk_ime_agents = ["claude" "codex" "hermes"];
+          switch_ascii_input_source_in_prefix = true;
+        };
+
+        remote.manage_ssh_config = false;
 
         # Package updates are managed through the Herdr flake input.
         update.version_check = false;
