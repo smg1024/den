@@ -17,5 +17,6 @@ return {
 	t = "com.mitchellh.ghostty",
 	v = "com.google.Chrome",
 	x = "com.apple.dt.Xcode",
+	y = "dev.herdr.app",
 	z = "com.google.android.studio",
 }

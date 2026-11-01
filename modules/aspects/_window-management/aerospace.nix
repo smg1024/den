@@ -112,6 +112,7 @@ in
           (workspaceRule "com.apple.dt.Xcode" "1")
           (workspaceRule "dev.zed.Zed-Nightly" "1")
           (workspaceRule "com.jetbrains.datagrip" "1")
+          (workspaceRule "dev.herdr.app" "1")
           (workspaceRule "at.studio.AsideBrowser" "2")
           (workspaceRule "com.google.Chrome" "2")
           (workspaceRule "com.anthropic.claudefordesktop" "3")
@@ -147,6 +148,7 @@ in
           (floatingRule "eu.exelban.Stats")
           (floatingRule "io.tailscale.ipn.macsys")
           (floatingRule "org.hammerspoon.Hammerspoon")
+          (floatingRule "anomaly.hex")
         ];
 
         after-startup-command = [

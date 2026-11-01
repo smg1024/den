@@ -44,6 +44,7 @@
 
       casks = [
         "abue-ammar/tinycast/tinycast"
+        "anomalyco/tap/hex"
         "aside"
         "batfi"
         "chatgpt"
@@ -51,6 +52,7 @@
         "claude-code@latest"
         "codex"
         "codexbar"
+        "herdr-app"
         "google-chrome"
         "iina"
         "keka"
