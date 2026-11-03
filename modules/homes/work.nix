@@ -14,6 +14,11 @@
         User = "kmeatai";
         Port = 10322;
       };
+      "kmeat-mac-mini" = {
+        Hostname = "kmeat-mac-mini";
+        User = "poby";
+        Port = 22;
+      };
     };
   in {
     # A visible, non-secret marker of the active mode.
