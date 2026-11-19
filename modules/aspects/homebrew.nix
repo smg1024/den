@@ -37,6 +37,7 @@
       brews = [
         "cue"
         "mole"
+        "pi-coding-agent"
         "podman"
         "podman-compose"
         "rtk"
