@@ -43,7 +43,7 @@
       ];
 
       casks = [
-        "abue-ammar/tinycast/tinycast"
+        "tinycast"
         "anomalyco/tap/hex"
         "aside"
         "batfi"
