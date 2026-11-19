@@ -28,6 +28,7 @@
           "npm:context-mode"
           "npm:@juicesharp/rpiv-todo"
           "git:github.com/smg1024/jev-router"
+          "npm:pi-subagents"
         ];
       };
     };
