@@ -5,7 +5,7 @@
     ...
   }: {
     programs.herdr = {
-      enable = true;
+      enable = false;
       package = inputs.herdr.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
       settings = {
